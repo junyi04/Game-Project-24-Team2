@@ -25,6 +25,10 @@ public class InventoryManager : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _successClip;
+    [Header("Effect")]
+    [SerializeField] private GameObject _combineEffectPrefab;
+
+    [SerializeField] private Transform _effectSpawnPoint;
 
     private Dictionary<string, int> _counts = new Dictionary<string, int>();
 
@@ -83,6 +87,25 @@ public class InventoryManager : MonoBehaviour
         if (_audioSource != null && _successClip != null)
         {
             _audioSource.PlayOneShot(_successClip);
+        }
+
+        if (_combineEffectPrefab != null)
+        {
+            GameObject effect = Instantiate(
+                _combineEffectPrefab,
+                _effectSpawnPoint.position,
+                Quaternion.identity,
+                _effectSpawnPoint
+            );
+
+            ParticleSystem ps = effect.GetComponent<ParticleSystem>();
+
+            if (ps != null)
+            {
+                ps.Play();
+            }
+
+            Debug.Log("이펙트 생성됨");
         }
 
         Debug.Log("조합 성공: 교과서 버섯 + 칠판 버섯 = 급식 포자");

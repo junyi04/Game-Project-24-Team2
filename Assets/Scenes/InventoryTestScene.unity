@@ -649,6 +649,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1586691980}
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _effectSpawnPoint
+      value: 
+      objectReference: {fileID: 1983603024}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: _mealMushroomText
       value: 
       objectReference: {fileID: 1586691980}
@@ -672,6 +676,10 @@ PrefabInstance:
       propertyPath: _blackboardSporeText
       value: 
       objectReference: {fileID: 2078879516}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _combineEffectPrefab
+      value: 
+      objectReference: {fileID: 905043123517586089, guid: 4d9e742304db3438c96f706cc468f45e, type: 3}
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: textbookMushroomText
       value: 
@@ -911,6 +919,18 @@ PrefabInstance:
     - target: {fileID: 791448317050725027, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145107092832301556, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 676398421}
+    - target: {fileID: 1145107092832301556, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145107092832301556, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1303628002999650451, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: itemType
@@ -1877,6 +1897,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1825049462582179691, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1728419492}
+    - targetCorrespondingSourceObject: {fileID: 1825049462582179691, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1983603024}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3807311950646710981, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       insertIndex: -1
@@ -2308,6 +2331,41 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 7765456611486290673, guid: fb1382d96035273428c39219b79c8b64, type: 3}
   m_PrefabInstance: {fileID: 738986693}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1983603023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1983603024}
+  m_Layer: 5
+  m_Name: EffectSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1983603024
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983603023}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738986695}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 140, y: -165}
+  m_SizeDelta: {x: 75, y: 75}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078879516 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4189096615264182868, guid: fb1382d96035273428c39219b79c8b64, type: 3}
