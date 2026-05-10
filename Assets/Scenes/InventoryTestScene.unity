@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -700, y: -450}
+  m_AnchoredPosition: {x: -750, y: -400}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &78204727
@@ -625,11 +625,35 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 1936934865}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _successClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a8d7b51b44b84cda83fd691662e7592, type: 3}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: mealSporeText
       value: 
       objectReference: {fileID: 1803295869}
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _mealSporeText
+      value: 
+      objectReference: {fileID: 1803295869}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _pencilSporeText
+      value: 
+      objectReference: {fileID: 1168841801}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: mealMushroomText
+      value: 
+      objectReference: {fileID: 1586691980}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _effectSpawnPoint
+      value: 
+      objectReference: {fileID: 1983603024}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _mealMushroomText
       value: 
       objectReference: {fileID: 1586691980}
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
@@ -637,15 +661,39 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 104363124}
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _textbookSporeText
+      value: 
+      objectReference: {fileID: 104363124}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _pencilMushroomText
+      value: 
+      objectReference: {fileID: 2121739138}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: blackboardSporeText
       value: 
       objectReference: {fileID: 2078879516}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _blackboardSporeText
+      value: 
+      objectReference: {fileID: 2078879516}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _combineEffectPrefab
+      value: 
+      objectReference: {fileID: 905043123517586089, guid: 4d9e742304db3438c96f706cc468f45e, type: 3}
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: textbookMushroomText
       value: 
       objectReference: {fileID: 1136214280}
     - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _textbookMushroomText
+      value: 
+      objectReference: {fileID: 1136214280}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: blackboardMushroomText
+      value: 
+      objectReference: {fileID: 852418884}
+    - target: {fileID: 1774423901997972, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _blackboardMushroomText
       value: 
       objectReference: {fileID: 852418884}
     - target: {fileID: 4037427657331930, guid: fb1382d96035273428c39219b79c8b64, type: 3}
@@ -760,6 +808,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 591843082671369020, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8996534974707820850, guid: 03034eaf246d548ba92e445fbf298842, type: 3}
+    - target: {fileID: 591843082671369020, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 591843082671369020, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 591843082671369020, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 603469724722406518, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -856,8 +920,24 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 1145107092832301556, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 676398421}
+    - target: {fileID: 1145107092832301556, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145107092832301556, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1303628002999650451, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: itemType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303628002999650451, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _itemType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1515376260234909029, guid: fb1382d96035273428c39219b79c8b64, type: 3}
@@ -956,6 +1036,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2124651408672650634, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124651408672650634, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2392986310891021060, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -974,6 +1062,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428595456731550347, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: itemType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428595456731550347, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _itemType
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2543453269137502087, guid: fb1382d96035273428c39219b79c8b64, type: 3}
@@ -1236,6 +1328,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4663765459022572565, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7388618356225961882, guid: 1a9de902090664d22ad38bca8e3e3f08, type: 3}
     - target: {fileID: 4700837475944732057, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1252,6 +1348,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4741848702568538666, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5806247343882902020, guid: 0aadb3e128c0c4618ad61aa9c08e0383, type: 3}
     - target: {fileID: 4788568651752236426, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1516,6 +1616,10 @@ PrefabInstance:
       propertyPath: itemType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7582858284273259938, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: _itemType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7685690725935756361, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1660,6 +1764,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 8294070899176486413, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3557953178723374972, guid: a4624888fdc3f42a6b0315e2ab96d828, type: 3}
     - target: {fileID: 8367972106040909541, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1789,6 +1897,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1825049462582179691, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1728419492}
+    - targetCorrespondingSourceObject: {fileID: 1825049462582179691, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1983603024}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3807311950646710981, guid: fb1382d96035273428c39219b79c8b64, type: 3}
       insertIndex: -1
@@ -1999,6 +2110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &1168841801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4275537351052405867, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+  m_PrefabInstance: {fileID: 738986693}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1312991496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,8 +2169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0716592f466408daf65cc8e39df986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUIController
-  inventoryPanel: {fileID: 738986698}
-  openButton: {fileID: 78204725}
+  _inventoryPanel: {fileID: 738986698}
+  _openButton: {fileID: 78204725}
 --- !u!114 &1586691980 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6063598873523181439, guid: fb1382d96035273428c39219b79c8b64, type: 3}
@@ -2204,9 +2326,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!82 &1936934865 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7765456611486290673, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+  m_PrefabInstance: {fileID: 738986693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1983603023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1983603024}
+  m_Layer: 5
+  m_Name: EffectSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1983603024
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983603023}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738986695}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 140, y: -165}
+  m_SizeDelta: {x: 75, y: 75}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078879516 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4189096615264182868, guid: fb1382d96035273428c39219b79c8b64, type: 3}
+  m_PrefabInstance: {fileID: 738986693}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &2121739138 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2152425321181634153, guid: fb1382d96035273428c39219b79c8b64, type: 3}
   m_PrefabInstance: {fileID: 738986693}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
