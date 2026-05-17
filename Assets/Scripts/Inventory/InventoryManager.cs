@@ -17,6 +17,9 @@ public class InventoryManager : MonoBehaviour
     [Header("이펙트")]
     [SerializeField] private GameObject _combineEffectPrefab;
     [SerializeField] private Transform _effectSpawnPoint;
+    
+    [Header("슬롯")]
+    [SerializeField] private InventorySlot[] _slots;
 
     // 아이템 개수 저장
     private Dictionary<Item, int> _counts =
@@ -33,6 +36,9 @@ public class InventoryManager : MonoBehaviour
         SetCount(_textbookMushroom, 3);
         SetCount(_blackboardMushroom, 3);
         SetCount(_mealSpore, 0);
+
+        _slots[0].SetItem(_textbookMushroom, 3);
+        _slots[1].SetItem(_blackboardMushroom, 2);
     }
 
     // 아이템 개수 반환
