@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a981b9631f8f2148a8baae195e75302, type: 3}
-  m_Name: PencilSpore
+  m_Name: PencilSporeItem
   m_EditorClassIdentifier: Assembly-CSharp::PencilSpore
-  sporeName: "\uC5F0\uD544 \uBC84\uC12F \uD3EC\uC790"
-  price: 0
-  icon: {fileID: 6483751431026795082, guid: e3623ea0dfaef9b478d310cfa6cd15a6, type: 3}
-  shopOrder: 1
+  _itemName: "\uC5F0\uD544 \uD3EC\uC790"
+  _price: 0
+  _icon: {fileID: 6483751431026795082, guid: e3623ea0dfaef9b478d310cfa6cd15a6, type: 3}
+  _shopOrder: 1
