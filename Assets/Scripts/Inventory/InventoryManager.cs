@@ -29,9 +29,19 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        PutItem(_textbookMushroom);
-        PutItem(_textbookMushroom);
-        PutItem(_blackboardMushroom);
+        // PutItem(_textbookMushroom);
+        // PutItem(_textbookMushroom);
+        // PutItem(_blackboardMushroom);
+    }
+
+    private void OnEnable()
+    {
+        ShopPurchaseHandler.OnItemPurchased += PutItem;
+    }
+
+    private void OnDisable()
+    {
+        ShopPurchaseHandler.OnItemPurchased -= PutItem;
     }
 
 
