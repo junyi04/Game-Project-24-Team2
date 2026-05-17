@@ -89,16 +89,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390145725e02c400ebbcfab297d62363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  pencilMushroomText: {fileID: 3014786518128209382}
-  pencilSporeText: {fileID: 1107214397771210724}
-  textbookMushroomText: {fileID: 1946319822623357377}
-  textbookSporeText: {fileID: 4434223109040950211}
-  blackboardMushroomText: {fileID: 2927841003380630489}
-  blackboardSporeText: {fileID: 1020898869139050971}
-  mealMushroomText: {fileID: 6930587090144175344}
-  mealSporeText: {fileID: 5090569239132198642}
-  audioSource: {fileID: 6902943544498200958}
-  successClip: {fileID: 0}
+  _pencilMushroomText: {fileID: 3014786518128209382}
+  _pencilSporeText: {fileID: 1107214397771210724}
+  _textbookMushroomText: {fileID: 1946319822623357377}
+  _textbookSporeText: {fileID: 4434223109040950211}
+  _blackboardMushroomText: {fileID: 2927841003380630489}
+  _blackboardSporeText: {fileID: 1020898869139050971}
+  _mealMushroomText: {fileID: 6930587090144175344}
+  _mealSporeText: {fileID: 5090569239132198642}
+  _audioSource: {fileID: 6902943544498200958}
+  _successClip: {fileID: 8300000, guid: 0a8d7b51b44b84cda83fd691662e7592, type: 3}
+  _combineEffectPrefab: {fileID: 7946079355100378078, guid: 4d9e742304db3438c96f706cc468f45e, type: 3}
+  _effectSpawnPoint: {fileID: 0}
 --- !u!82 &6902943544498200958
 AudioSource:
   m_ObjectHideFlags: 0

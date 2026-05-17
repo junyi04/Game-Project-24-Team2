@@ -103,6 +103,7 @@ public class InventoryManager : MonoBehaviour
             if (ps != null)
             {
                 ps.Play();
+                Debug.Log("플레이됨");
             }
 
             Debug.Log("이펙트 생성됨");

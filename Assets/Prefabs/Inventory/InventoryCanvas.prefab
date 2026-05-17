@@ -750,10 +750,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4189096615264182868}
     - target: {fileID: 3750956317865506843, guid: 7add334d2c13f4404b87eaf03b0bb8d1, type: 3}
-      propertyPath: _combineEffectPrefab
-      value: 
-      objectReference: {fileID: 905043123517586089, guid: 4d9e742304db3438c96f706cc468f45e, type: 3}
-    - target: {fileID: 3750956317865506843, guid: 7add334d2c13f4404b87eaf03b0bb8d1, type: 3}
       propertyPath: _textbookMushroomText
       value: 
       objectReference: {fileID: 3389777445639506510}
