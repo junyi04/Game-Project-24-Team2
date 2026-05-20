@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BlackboardLife : MonoBehaviour
 {
+    public static BlackboardLife Instance { get; private set; }
+    
     [Header("Life Counter Settings")]
     [SerializeField] private GameObject[] jungSteps; // Jung1 ~ Jung5 배열
     
