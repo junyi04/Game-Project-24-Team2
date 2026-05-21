@@ -33,6 +33,9 @@ public class InventorySlot : MonoBehaviour,
     private void Start()
     {
         _canvas = GetComponentInParent<Canvas>();
+
+        _icon.enabled = false;
+        _countText.text = "";
     }
 
     public void OnBeginDrag(PointerEventData eventData)
