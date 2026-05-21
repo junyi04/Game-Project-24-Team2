@@ -4,7 +4,7 @@ using System;
 public class Money : MonoBehaviour
 {
     public static event Action<float> OnMoneyChanged;
-    public static float currentMoney = 50000f;
+    public static float currentMoney = 0f;
 
     private void OnEnable()
     {

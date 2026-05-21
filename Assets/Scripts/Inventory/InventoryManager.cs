@@ -77,9 +77,8 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        // PutItem(_textbookMushroom);
-        // PutItem(_textbookMushroom);
-        // PutItem(_blackboardMushroom);
+        Item loadedPotItem = Resources.Load<Item>("Items/PotItems/NormalPotItem");
+        PutItem(loadedPotItem);
     }
 
     private void OnDestroy()
