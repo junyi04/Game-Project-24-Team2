@@ -104,9 +104,12 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 }
             else
                 {
-                    pot.ShowSpore(_dragItemSO);
-                    pot.IsSporePlaced = true;
-                    OnSporePlaced?.Invoke();
+                    if (pot.IsPotPlaced)
+                    {
+                        pot.ShowSpore(_dragItemSO);
+                        pot.IsSporePlaced = true;
+                        OnSporePlaced?.Invoke();
+                    }    
                 }
         }
     }
