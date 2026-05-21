@@ -17,6 +17,12 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _successClip;
 
+    [Header("Combination")]
+    [SerializeField] private List<Item> _draggedList;
+    [SerializeField] private List<Item> _targetList;
+
+    private Dictionary<Item, Item> _itemPair;
+
     [Header("Effects")]
     [SerializeField] private GameObject _combineEffectPrefab;
     [SerializeField] private Transform _effectSpawnPoint;
@@ -63,6 +69,8 @@ public class InventoryManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(transform.root.gameObject); // 씬을 이동해도 인벤토리 캔버스 유지
 
+        InitializeCombinationPairs();
+
         // 인벤토리 초기화 전에 구매된 아이템들을 모두 추가
         if (_pendingPurchases.Count > 0)
         {
@@ -89,34 +97,58 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    private void InitializeCombinationPairs()
+    {
+        _itemPair = new Dictionary<Item, Item>();
+        int pairCount = Mathf.Min(_draggedList.Count, _targetList.Count);
+
+        for (int i = 0; i < pairCount; i++)
+        {
+            Item dragged = _draggedList[i];
+            Item target = _targetList[i];
+
+            if (dragged == null || target == null)
+            {
+                continue;
+            }
+
+            if (!_itemPair.ContainsKey(dragged))
+            {
+                _itemPair.Add(dragged, target);
+            }
+
+            if (!_itemPair.ContainsKey(target))
+            {
+                _itemPair.Add(target, dragged);
+            }
+        }
+    }
 
     // 인벤토리에 아이템 추가: 같은 아이템 찾으면 개수 증가, 없으면 새 슬롯에 추가
     public void PutItem(Item item)
     {
-        // 이미 있는 같은 아이템 검색
         foreach (InventorySlot slot in _slots)
         {
             if (slot.Item != null && AreSameItem(slot.Item, item))
             {
+                GameLog.Log(item.ItemName + " 개수 증가");
                 slot.AddCount(1);
-                Debug.Log(item.ItemName + " 개수 증가");
                 return;
             }
         }
 
-        // 빈 슬롯 검색
         foreach (InventorySlot slot in _slots)
         {
             if (slot.Item == null)
             {
                 slot.SetItem(item, 1);
-                Debug.Log(item.ItemName + " 새 슬롯 추가");
+                GameLog.Log(item.ItemName + " 새 슬롯 추가");
                 RefreshAllSlots();
                 return;
             }
         }
 
-        Debug.Log("인벤토리가 가득 찼습니다.");
+        GameLog.Log("인벤토리가 가득 찼습니다.");
     }
 
     // 모든 슬롯의 UI를 다시 그리기 (닫혀있던 인벤토리 열 때 사용)
@@ -177,47 +209,53 @@ public class InventoryManager : MonoBehaviour
     // 아이템 조합 시도
     public void TryCombine(Item draggedItem, Item targetItem)
     {
-        // 교과서 버섯 + 칠판 버섯 조합 검사
-        bool isCorrectCombination =
-            (draggedItem == _textbookMushroom &&
-             targetItem == _blackboardMushroom)
-            ||
-            (draggedItem == _blackboardMushroom &&
-             targetItem == _textbookMushroom);
-
-        if (!isCorrectCombination)
+        if (draggedItem == null || targetItem == null || _itemPair == null)
         {
-            Debug.Log("조합 실패");
             return;
         }
 
-        // 재료 부족 검사
-        if (GetItemCount(_textbookMushroom) < 1)
+        if (!_itemPair.TryGetValue(draggedItem, out Item expectedTarget) ||
+            !AreSameItem(expectedTarget, targetItem))
         {
-            Debug.Log("교과서 버섯 부족");
+            GameLog.Log("조합 실패");
             return;
         }
 
-        if (GetItemCount(_blackboardMushroom) < 1)
+        int draggedCount = GetItemCount(draggedItem);
+        int targetCount = GetItemCount(targetItem);
+
+        if (AreSameItem(draggedItem, targetItem))
         {
-            Debug.Log("칠판 버섯 부족");
-            return;
+            if (draggedCount < 2)
+            {
+                GameLog.Log(draggedItem.ItemName + " 부족");
+                return;
+            }
+        }
+        else
+        {
+            if (draggedCount < 1)
+            {
+                GameLog.Log(draggedItem.ItemName + " 부족");
+                return;
+            }
+
+            if (targetCount < 1)
+            {
+                GameLog.Log(targetItem.ItemName + " 부족");
+                return;
+            }
         }
 
-        // 재료 제거
-        RemoveItem(_textbookMushroom, 1);
-        RemoveItem(_blackboardMushroom, 1);
-
-        // 결과 아이템 추가
+        RemoveItem(draggedItem, 1);
+        RemoveItem(targetItem, 1);
         PutItem(_mealSpore);
 
-        // 조합 성공 사운드 재생
         if (_audioSource != null && _successClip != null)
         {
             _audioSource.PlayOneShot(_successClip);
         }
 
-        // 조합 성공 이펙트 생성
         if (_combineEffectPrefab != null)
         {
             GameObject effect = Instantiate(
@@ -236,6 +274,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        Debug.Log("조합 성공");
+        GameLog.Log("조합 성공");
     }
 }
