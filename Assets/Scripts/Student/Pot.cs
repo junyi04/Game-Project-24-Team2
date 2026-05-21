@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using System;
 using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.SceneManagement;
 
 public class Pot : MonoBehaviour
 { 
@@ -49,14 +50,33 @@ public class Pot : MonoBehaviour
     private int _whatspore;
     private float _timer = 0f; //테스트용 타이머
 
+    // 화분의 상태를 저장할 클래스와 정적(Static) 배열
+    public class PotState
+    {
+        public bool IsPotPlaced;
+        public bool IsSporePlaced;
+        public int WhatSpore;
+        public float WaterGauge;
+        public float Growth;
+        public bool IsGrown;
+    }
+    private static PotState[] _savedStates;
+
     private void Awake()
     {
+        if (_savedStates == null)
+        {
+            _savedStates = new PotState[4];
+            for (int i = 0; i < 4; i++) _savedStates[i] = new PotState();
+        }
+
         for (int i = 0; i < _spores.Length; i++)
         {
             _spores[i].SetActive(false);
             _mushrooms[i].SetActive(false);
         }
     }
+
     private void OnEnable()
     {
         _sprite = GetComponent<SpriteRenderer>();
@@ -73,11 +93,55 @@ public class Pot : MonoBehaviour
         InventorySlot.OnDragEndedWorld += HandleDragEndedWorld;
     }
 
+    private void Start()
+    {
+        // 씬이 열릴 때 이전 상태 복구
+        int index = transform.GetSiblingIndex();
+        if (index >= 0 && index < 4)
+        {
+            PotState state = _savedStates[index];
+            IsPotPlaced = state.IsPotPlaced;
+            IsSporePlaced = state.IsSporePlaced;
+            _whatspore = state.WhatSpore;
+            _waterGauge = state.WaterGauge;
+            _growth = state.Growth;
+            _isGrown = state.IsGrown;
+
+            if (IsPotPlaced) ShowPot();
+            else HideGuide(); // 설치되지 않은 화분은 완벽히 숨김
+
+            if (IsSporePlaced && !_isGrown)
+            {
+                _spores[_whatspore].SetActive(true);
+            }
+            if (_isGrown)
+            {
+                Evolution(_whatspore);
+            }
+        }
+    }
+
     private void OnDisable()
     {
         InventorySlot.OnDragStarted -= HandleDragStarted;
         InventorySlot.OnDragCanceled -= HandleDragCanceled;
         InventorySlot.OnDragEndedWorld -= HandleDragEndedWorld;
+    }
+
+    private void OnDestroy()
+    {
+        // 씬이 파괴될 때 현재 화분의 상태를 저장
+        int index = transform.GetSiblingIndex();
+        if (_savedStates != null && index >= 0 && index < 4)
+        {
+            PotState state = _savedStates[index];
+            state.IsPotPlaced = IsPotPlaced;
+            state.IsSporePlaced = IsSporePlaced;
+            state.WhatSpore = _whatspore;
+            state.WaterGauge = _waterGauge;
+            state.Growth = _growth;
+            state.IsGrown = _isGrown;
+        }
     }
 
     private void Update()
@@ -130,6 +194,7 @@ public class Pot : MonoBehaviour
 
     public void ShowPot() //정확한 위치에 화분 배치 시 화분을 완전 불투명하게 표시
     {
+        _sprite.enabled = true;
         SetAlpha(1f);
     }
 
