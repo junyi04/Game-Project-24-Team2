@@ -10,6 +10,8 @@ using System.IO;
 
 public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
 {   
+    public static event Action OnPotPlaced;
+    public static event Action OnSporePlaced;
     [SerializeField] private UnityEngine.UI.Image image;
     [SerializeField] private Item _dragItemSO;
     [SerializeField] private GameObject[] Pots; 
@@ -98,11 +100,13 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 {
                     pot.ShowPot();
                     pot.IsPotPlaced = true;
+                    OnPotPlaced?.Invoke();
                 }
             else
                 {
                     pot.ShowSpore(_dragItemSO);
                     pot.IsSporePlaced = true;
+                    OnSporePlaced?.Invoke();
                 }
         }
     }
