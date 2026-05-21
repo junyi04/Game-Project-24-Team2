@@ -9,16 +9,24 @@ public class Money : MonoBehaviour
     private void OnEnable()
     {
         ShopPurchaseHandler.OnItemPurchased += HandleItemPurchased;
+        Pot.OnMushroomReaped += HandleMushroomReaped;
     }
 
     private void OnDisable()
     {
         ShopPurchaseHandler.OnItemPurchased -= HandleItemPurchased;
+        Pot.OnMushroomReaped -= HandleMushroomReaped;
     }
 
     private void HandleItemPurchased(Item item)
     {
         currentMoney -= item.Price;
+        OnMoneyChanged?.Invoke(currentMoney);
+    }
+
+    private void HandleMushroomReaped()
+    {
+        currentMoney += 500f;
         OnMoneyChanged?.Invoke(currentMoney);
     }
 }
