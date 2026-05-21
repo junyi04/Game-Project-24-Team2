@@ -270,5 +270,6 @@ public class Pot : MonoBehaviour
     {
         OnMushroomReaped?.Invoke();
         _isGrown = false;
+        Debug.Log("OnMushroomReaped");
     }
 }

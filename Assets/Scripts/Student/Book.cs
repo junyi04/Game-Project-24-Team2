@@ -46,9 +46,6 @@ public class Book : MonoBehaviour
     [SerializeField] private AudioSource _Pencil;
     [SerializeField] private AudioSource _BookOpen;
 
-
-    //디버깅 최적화용(나중에 지워야함)
-    private float _timer = 0f;
     private void Start()
     {
         _bookCollider = GetComponent<BoxCollider2D>();
@@ -82,14 +79,6 @@ public class Book : MonoBehaviour
 
         //게이지 시각화
         UpdateBookGaugeBar();
-
-        //(테스트용 추후 삭제 예정) 0.5초마다 의심도 / 돈 표시
-        _timer += Time.deltaTime;
-        if (_timer >= 0.5f)
-        {
-            Debug.Log($"의심도 : {_doubtGauge}    돈 : {_money}");
-            _timer = 0f;
-        }
     }
 
     private void InitBookAudio()

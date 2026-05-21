@@ -10,12 +10,14 @@ public class Money : MonoBehaviour
     {
         ShopPurchaseHandler.OnItemPurchased += HandleItemPurchased;
         Pot.OnMushroomReaped += HandleMushroomReaped;
+        Book.OnStudyCompleted += HandleStudyCompleted;
     }
 
     private void OnDisable()
     {
         ShopPurchaseHandler.OnItemPurchased -= HandleItemPurchased;
         Pot.OnMushroomReaped -= HandleMushroomReaped;
+        Book.OnStudyCompleted -= HandleStudyCompleted;
     }
 
     private void HandleItemPurchased(Item item)
@@ -28,5 +30,13 @@ public class Money : MonoBehaviour
     {
         currentMoney += 500f;
         OnMoneyChanged?.Invoke(currentMoney);
+        Debug.Log("HandleStudyCompleted");
+    }
+
+    private void HandleStudyCompleted()
+    {
+        currentMoney += 50f;
+        OnMoneyChanged?.Invoke(currentMoney);
+        Debug.Log("HandleStudyCompleted");
     }
 }

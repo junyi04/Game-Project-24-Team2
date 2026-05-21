@@ -19,15 +19,28 @@ public class ShopPurchaseHandler : MonoBehaviour
         purchaseFailSound = Resources.Load<AudioClip>("Shop/ShopPurchaseFailSound1");
     }
 
+    private void OnEnable()
+    {
+        Money.OnMoneyChanged += HandleMoneyChanged;
+    }
+
+    private void OnDisable()
+    {
+        Money.OnMoneyChanged -= HandleMoneyChanged;
+    }
+
     public void SetMoneyText(TextMeshProUGUI ui)
     {
         moneyText = ui;
-        UpdateMoneyUI(); // 초기 UI 업데이트
+        HandleMoneyChanged(Money.currentMoney); // 초기 UI 업데이트
     }
 
-    public void UpdateMoneyUI()
+    private void HandleMoneyChanged(float newMoney)
     {
-        moneyText.text = $"보유금액 : {Money.currentMoney}원";
+        if (moneyText != null)
+        {
+            moneyText.text = $"보유금액 : {newMoney}원";
+        }
     }
 
     public void TryPurchase(Item item)
@@ -36,9 +49,6 @@ public class ShopPurchaseHandler : MonoBehaviour
         {
             // 아이템 구매 이벤트 전파
             OnItemPurchased?.Invoke(item);
-
-            // 차감된 금액을 다시 읽어와 UI 업데이트
-            UpdateMoneyUI();
 
             // 구매 사운드 출력
             audioSource.PlayOneShot(purchaseCompleteSound);
