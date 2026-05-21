@@ -54,7 +54,14 @@ public class InventoryManager : MonoBehaviour
     // 초기화: 보류 중인 구매 아이템들을 처리
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(transform.root.gameObject); // 중복 생성 방지
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(transform.root.gameObject); // 씬을 이동해도 인벤토리 캔버스 유지
 
         // 인벤토리 초기화 전에 구매된 아이템들을 모두 추가
         if (_pendingPurchases.Count > 0)

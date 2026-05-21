@@ -9,6 +9,9 @@ using Microsoft.Unity.VisualStudio.Editor;
 public class Pot : MonoBehaviour
 { 
     public static event Action OnMushroomReaped;
+    public static event Action OnPotPlaced;
+    public static event Action OnSporePlaced;
+
     [Header("Settings")]
     //포자 관련
     [SerializeField] private GameObject[] _spores;
@@ -64,6 +67,17 @@ public class Pot : MonoBehaviour
             _waterMaxGaugeTransform.gameObject.SetActive(false);
         }
         InitPotAudio();
+
+        InventorySlot.OnDragStarted += HandleDragStarted;
+        InventorySlot.OnDragCanceled += HandleDragCanceled;
+        InventorySlot.OnDragEndedWorld += HandleDragEndedWorld;
+    }
+
+    private void OnDisable()
+    {
+        InventorySlot.OnDragStarted -= HandleDragStarted;
+        InventorySlot.OnDragCanceled -= HandleDragCanceled;
+        InventorySlot.OnDragEndedWorld -= HandleDragEndedWorld;
     }
 
     private void Update()
@@ -271,5 +285,51 @@ public class Pot : MonoBehaviour
         OnMushroomReaped?.Invoke();
         _isGrown = false;
         Debug.Log("OnMushroomReaped");
+    }
+
+    private void HandleDragStarted(Item item)
+    {
+        if (!IsPotPlaced)
+        {
+            ShowGuide();
+        }
+    }
+
+    private void HandleDragCanceled()
+    {
+        if (!IsPotPlaced)
+        {
+            HideGuide();
+        }
+    }
+
+    private void HandleDragEndedWorld(Item item, Vector2 mousePos, Action<bool> onResult)
+    {
+        Collider2D hit = Physics2D.OverlapPoint(mousePos);
+        if (hit == _potCollider)
+        {
+            if (item is PotItem)
+            {
+                if (!IsPotPlaced)
+                {
+                    ShowPot();
+                    IsPotPlaced = true;
+                    OnPotPlaced?.Invoke();
+                    onResult?.Invoke(true);
+                }
+                else onResult?.Invoke(false);
+            }
+            else // 포자인 경우
+            {
+                if (IsPotPlaced && !IsSporePlaced)
+                {
+                    ShowSpore(item);
+                    IsSporePlaced = true;
+                    OnSporePlaced?.Invoke();
+                    onResult?.Invoke(true);
+                }
+                else onResult?.Invoke(false);
+            }
+        }
     }
 }
