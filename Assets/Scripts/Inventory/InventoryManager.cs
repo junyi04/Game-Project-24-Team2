@@ -87,6 +87,9 @@ public class InventoryManager : MonoBehaviour
     {
         Item loadedPotItem = Resources.Load<Item>("Items/PotItems/NormalPotItem");
         PutItem(loadedPotItem);
+
+        // 버섯 수확 이벤트 구독
+        Pot.OnMushroomReaped += HandleMushroomReaped;
     }
 
     private void OnDestroy()
@@ -94,6 +97,24 @@ public class InventoryManager : MonoBehaviour
         if (Instance == this)
         {
             Instance = null;
+        }
+
+        // 버섯 수확 이벤트 구독 해제
+        Pot.OnMushroomReaped -= HandleMushroomReaped;
+    }
+
+    // 버섯 수확 시 인벤토리에 추가
+    private void HandleMushroomReaped(Item mushroomItem)
+    {
+        Debug.Log($"InventoryManager.HandleMushroomReaped 호출: mushroomItem={mushroomItem?.ItemName}");
+        
+        if (mushroomItem != null)
+        {
+            PutItem(mushroomItem);
+        }
+        else
+        {
+            Debug.LogError("HandleMushroomReaped: mushroomItem이 NULL입니다!");
         }
     }
 
@@ -131,7 +152,6 @@ public class InventoryManager : MonoBehaviour
         {
             if (slot.Item != null && AreSameItem(slot.Item, item))
             {
-                GameLog.Log(item.ItemName + " 개수 증가");
                 slot.AddCount(1);
                 return;
             }
@@ -142,13 +162,10 @@ public class InventoryManager : MonoBehaviour
             if (slot.Item == null)
             {
                 slot.SetItem(item, 1);
-                GameLog.Log(item.ItemName + " 새 슬롯 추가");
                 RefreshAllSlots();
                 return;
             }
         }
-
-        GameLog.Log("인벤토리가 가득 찼습니다.");
     }
 
     // 모든 슬롯의 UI를 다시 그리기 (닫혀있던 인벤토리 열 때 사용)
@@ -217,7 +234,6 @@ public class InventoryManager : MonoBehaviour
         if (!_itemPair.TryGetValue(draggedItem, out Item expectedTarget) ||
             !AreSameItem(expectedTarget, targetItem))
         {
-            GameLog.Log("조합 실패");
             return;
         }
 
@@ -228,7 +244,6 @@ public class InventoryManager : MonoBehaviour
         {
             if (draggedCount < 2)
             {
-                GameLog.Log(draggedItem.ItemName + " 부족");
                 return;
             }
         }
@@ -236,13 +251,11 @@ public class InventoryManager : MonoBehaviour
         {
             if (draggedCount < 1)
             {
-                GameLog.Log(draggedItem.ItemName + " 부족");
                 return;
             }
 
             if (targetCount < 1)
             {
-                GameLog.Log(targetItem.ItemName + " 부족");
                 return;
             }
         }
@@ -273,7 +286,5 @@ public class InventoryManager : MonoBehaviour
                 ps.Play();
             }
         }
-
-        GameLog.Log("조합 성공");
     }
 }
