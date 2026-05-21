@@ -47,21 +47,21 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     private void OrderUI(Item draggingItemSO) //화분생성, 연필포자 등의 위치조절
     {
-        switch (draggingItemSO.ItemName)
+        switch (draggingItemSO)
         {
-            case "화분":
+            case PotItem:
                 _rectTransform.anchoredPosition = new Vector2(350f, 175f);
                 break;
-            case "연필 포자":
+            case PencilSporeItem:
                 _rectTransform.anchoredPosition = new Vector2(350f, 65f);
                 break;
-            case "교과서 포자":
+            case TextbookSporeItem:
                 _rectTransform.anchoredPosition = new Vector2(350f, -5f);
                 break;
-            case "칠판 포자":
+            case BlackboardSporeItem:
                 _rectTransform.anchoredPosition = new Vector2(350f, -75f);
                 break;
-            case "급식 포자":
+            case MealSporeItem:
                 _rectTransform.anchoredPosition = new Vector2(350f, -145f);
                 break;
             default:
@@ -96,7 +96,7 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         {
             GameObject hitObject = hitCollider.gameObject;
             Pot pot = hitObject.GetComponent<Pot>();
-            if(_dragItemSO.ItemName == "화분")
+            if(_dragItemSO is PotItem)
                 {
                     pot.ShowPot();
                     pot.IsPotPlaced = true;

@@ -121,21 +121,21 @@ public class Pot : MonoBehaviour
 
     public void ShowSpore(Item item)
     {
-        switch (item.ItemName)
+        switch (item)
         {
-            case "연필 포자":
+            case PencilSporeItem:
                 _spores[0].SetActive(true);
                 _whatspore = 0;
                 break;
-            case "교과서 포자":
+            case TextbookSporeItem:
                 _spores[1].SetActive(true);
                 _whatspore = 1;
                 break;
-            case "칠판 포자":
+            case BlackboardSporeItem:
                 _spores[2].SetActive(true);
                 _whatspore = 2;
                 break;
-            case "급식 포자":
+            case MealSporeItem:
                 _spores[3].SetActive(true);
                 _whatspore = 3;
                 break;
