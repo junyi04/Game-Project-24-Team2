@@ -352,25 +352,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8843fcec163dc7a43b50065e9608d2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pot
+  PotIndex: 3
+  isPotPlaced: 0
   _spores:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _whatSpore: 0
-  _sporeGap: 1.5
-  _startingGap: 1.7
-  _pottedsize: 1.6
   _waterGauge: 0
   _waterMinGauge: 0
   _waterMaxGauge: 30
   _waterGaugeSpeed: 10
   _growth: 0
+  _maxGrowth: 100
   _spore:
     serializedVersion: 2
     m_Bits: 128
   _waterMaxGaugeTransform: {fileID: 481740933200751585}
   _waterGaugeTransform: {fileID: 2076769241821422547}
+  IsPotted: 0
   _Potting: {fileID: 2882373877356786621}
   _Watering: {fileID: 4218427457977448433}
   _pottingEffect: {fileID: 982766298903887479}

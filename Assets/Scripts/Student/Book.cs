@@ -5,9 +5,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.InputSystem;
+using System;
 
 public class Book : MonoBehaviour
 {
+    public static event Action OnStudyCompleted;
+
     [Header("Settings")]
     //책 게이지 올라가는 속도
     public float _bookGaugeSpeed = 10f;
@@ -136,6 +139,7 @@ public class Book : MonoBehaviour
             _money += (_doubtMinGauge - _doubtGauge)/_doubtGaugeReduction * _moneyGet; //보상 지급
             _doubtGauge = _doubtMinGauge;
         }
+        OnStudyCompleted?.Invoke();
     }
 
     private void DecreaseBookGauge()

@@ -8,27 +8,30 @@ using Microsoft.Unity.VisualStudio.Editor;
 
 public class Pot : MonoBehaviour
 { 
-    public static event Action<int> OnGrowingDone;
-    public static event Action<int> OnMushroomReaped;
+    public static event Action OnMushroomReaped;
     [Header("Settings")]
-    public int PotIndex;    //Pot -> PotLocation으로 어느 화분인지에 대한 정보 전달
+    //포자 관련
+    [SerializeField] private GameObject[] _spores;
+    [SerializeField] private LayerMask _spore;
 
+    //버섯 관련
+    [SerializeField] private GameObject[] _mushrooms;
+
+    //물 게이지 관련
     [SerializeField] private float _waterGauge = 0f; //현재 물 게이지
     [SerializeField] private float _waterMinGauge = 0f; //최소 물 게이지
     [SerializeField] private float _waterMaxGauge = 30f; //최대 물 게이지
     [SerializeField] private float _waterGaugeSpeed = 10f; //물 게이지 올라가는 속도
-
-    [SerializeField] private float _growth; //성장도
-    [SerializeField] private float _maxGrowth = 100f;
-    [SerializeField] private LayerMask _spore;
-
     [SerializeField] private Transform _waterMaxGaugeTransform;
     [SerializeField] private Transform _waterGaugeTransform;
-    [HideInInspector] public bool IsPotted;
 
-    private BoxCollider2D _potCollider;
-    private Transform _potTransform;
-    private bool IsGrown = false;
+    //성장도 관련
+    [SerializeField] private float _growth; //성장도
+    [SerializeField] private float _maxGrowth = 100f;
+
+    //bool
+    [HideInInspector] public bool IsSporePlaced = false;
+    [HideInInspector] public bool IsPotPlaced = false;
     
     [Header("Sound")]
     [SerializeField] private AudioSource _Potting;
@@ -37,12 +40,24 @@ public class Pot : MonoBehaviour
     [Header("Particle")]
     [SerializeField] private ParticleSystem _pottingEffect;
 
+    private SpriteRenderer _sprite;
+    private BoxCollider2D _potCollider;
+    private bool _isGrown = false;
+    private int _whatspore;
     private float _timer = 0f; //테스트용 타이머
 
+    private void Awake()
+    {
+        for (int i = 0; i < _spores.Length; i++)
+        {
+            _spores[i].SetActive(false);
+            _mushrooms[i].SetActive(false);
+        }
+    }
     private void OnEnable()
     {
+        _sprite = GetComponent<SpriteRenderer>();
         _potCollider = GetComponent<BoxCollider2D>();
-        _potTransform = GetComponent<Transform>();
 
         if (_waterMaxGaugeTransform != null) //처음에 물 게이지 표시 안되게
         {
@@ -55,7 +70,7 @@ public class Pot : MonoBehaviour
     {
         if (IsClickPot())
         {
-            if (IsPotted) //포자 심었을 때
+            if (IsSporePlaced) //포자 심었을 때
             {
                 IncreaseWaterGauge(); //클릭하면 게이지 상승
                 if (_waterGauge >= _waterMaxGauge)
@@ -63,8 +78,7 @@ public class Pot : MonoBehaviour
                     CompleteWater();
                 }
             }
-
-            if (IsGrown && IsClickDownPot()) //버섯이 다 자란 화분을 클릭한 시점에 버섯 수확
+            if (_isGrown && IsClickDownPot()) //버섯이 다 자란 화분을 클릭한 시점에 버섯 수확
             {
                 ReapMushroom();
             }
@@ -81,12 +95,66 @@ public class Pot : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer >= 0.5f)
         {
-            if (IsPotted)
+            if (IsSporePlaced)
             {
                 Debug.Log($"성장도 : {_growth}");
             }
             _timer = 0f;
         }
+    }
+
+    public void ShowGuide() //드래그 중 화분 반투명하게 표시
+    {
+        _sprite.enabled = true;
+        SetAlpha(0.5f);
+    }
+
+    public void HideGuide()
+    {
+        _sprite.enabled = false;
+    }
+
+    public void ShowPot() //정확한 위치에 화분 배치 시 화분을 완전 불투명하게 표시
+    {
+        SetAlpha(1f);
+    }
+
+    public void ShowSpore(Item item)
+    {
+        switch (item)
+        {
+            case PencilSporeItem:
+                _spores[0].SetActive(true);
+                _whatspore = 0;
+                break;
+            case TextbookSporeItem:
+                _spores[1].SetActive(true);
+                _whatspore = 1;
+                break;
+            case BlackboardSporeItem:
+                _spores[2].SetActive(true);
+                _whatspore = 2;
+                break;
+            case MealSporeItem:
+                _spores[3].SetActive(true);
+                _whatspore = 3;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void Evolution(int whatspore) //포자 -> 버섯 형태변환
+    {
+        _spores[whatspore].SetActive(false);
+        _mushrooms[whatspore].SetActive(true);
+    }
+
+    private void SetAlpha(float alpha) //투명도 조절
+    {
+        Color color = _sprite.color;
+        color.a = alpha;
+        _sprite.color = color;
     }
 
     private void InitPotAudio()
@@ -145,9 +213,9 @@ public class Pot : MonoBehaviour
         _growth += 20f;
         if (_growth >= _maxGrowth)
         {
-            OnGrowingDone?.Invoke(PotIndex);
-            IsPotted = false;
-            IsGrown = true;
+            Evolution(_whatspore);
+            IsSporePlaced = false;
+            _isGrown = true;
         }
     }
 
@@ -156,7 +224,6 @@ public class Pot : MonoBehaviour
         if (_waterGauge > _waterMinGauge)
             {
                 _waterGauge -= _waterGaugeSpeed * Time.deltaTime;
-
                 _waterGauge = Mathf.Max(_waterGauge, _waterMinGauge);
             }
         _Watering.Stop();
@@ -177,7 +244,7 @@ public class Pot : MonoBehaviour
 
     private void UpdateWaterGaugeBar()
     {
-        if (IsPotted)
+        if (IsSporePlaced)
         {
             if (IsClickPot())
             {
@@ -201,7 +268,7 @@ public class Pot : MonoBehaviour
 
     private void ReapMushroom()
     {
-        OnMushroomReaped?.Invoke(PotIndex);
-        IsGrown = false;
+        OnMushroomReaped?.Invoke();
+        _isGrown = false;
     }
 }
